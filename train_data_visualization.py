@@ -79,7 +79,7 @@ class Visualization():
 
 
 if __name__ == "__main__":
-    Visualization.plot_crimes_by_coordinates()
-    # Visualization.plot_crime_category_by_date_time("DRUNKENNESS")
-    # Visualization.plot_crime_category_by_date_time("FAMILY OFFENSES")
-    # Visualization.plot_crime_category_by_date_time("VEHICLE THEFT")
+     Visualization.plot_crimes_by_coordinates()
+     Visualization.plot_crime_category_by_date_time("DRUNKENNESS")
+     Visualization.plot_crime_category_by_date_time("FAMILY OFFENSES")
+     Visualization.plot_crime_category_by_date_time("VEHICLE THEFT")

@@ -1,5 +1,3 @@
-__author__ = 'carlos.ginestra'
-
 import numpy
 from scipy.sparse import csr_matrix
 from data_preparation import DataDAO
@@ -22,7 +20,6 @@ class TrainingFactory():
     @staticmethod
     def get_category_vector(category):
 
-        ## utilizar MultiLabelBinarizaer()
 
         if category not in CATEGORIES:
             print("Unknown category")
@@ -44,10 +41,11 @@ class TrainingFactory():
                 break
             matrix.append(vector)
 
-
-        scaled_matrix = scale(matrix, axis=0)
+        #center data for 0 mean and sd
+        scaled_matrix = scale(matrix) 
         sparse = csr_matrix(scaled_matrix)
-
+        
+        # input csrm
         return sparse
 
 
@@ -62,6 +60,7 @@ class TrainingFactory():
             targets_matrix.append(multiclass_vector)
 
         sparse = csr_matrix(targets_matrix)
+        # target category vectors
         return sparse
 
     @staticmethod
@@ -75,7 +74,7 @@ class TrainingFactory():
                 targets_cat.append(1)
             else:
                 targets_cat.append(0)
-
+        # for a specific cat
         return targets_cat
 
     @staticmethod
@@ -102,7 +101,7 @@ class TrainingFactory():
             training_data.append(sample)
             training_target.append(0)
 
-        scaler = MinMaxScaler()
+        scaler = MinMaxScaler() # 0-1 range
         training_data_scaled = scaler.fit_transform(training_data)
 
         # training_data_scaled = scale(training_data,axis=0)
@@ -115,4 +114,4 @@ if __name__ == "__main__":
 
     # TrainingFactory.build_sparse_matrix_input()
     TrainingFactory.build_sparse_matrix_target()
-    print TrainingFactory.get_category_vector("WARRANTS")
+    print "warrants=",TrainingFactory.get_category_vector("WARRANTS")

@@ -37,6 +37,7 @@ class Visual():
         plt.tight_layout()
         plt.subplots_adjust(top=0.95)
         plt.savefig('Distribution_of_Crimes_by_Hour.png')
+        plt.show('Distribution_of_Crimes_by_Hour.png')
 
 
         # We can also have a look at the distribution over days in a week
@@ -46,6 +47,7 @@ class Visual():
         fig,ax=plt.subplots()
         day_of_week.plot(kind='bar',ax=ax,title='Discribution of Crimes by Day in Week',rot=0)
         fig.savefig('Distribution_of_Crimes_by_Day_in_Week.png')
+        fig.show('Distribution_of_Crimes_by_Day_in_Week.png')
 
 
         # Next, let's explore the spatial distribution of crimes. We can create a simple crosstab table and look at the count distribution
@@ -56,6 +58,7 @@ class Visual():
         ten_most_crime_by_district=pd.crosstab(ten_most_common['PdDistrict'],ten_most_common['Category'])
         ten_most_crime_by_district.plot(kind='barh',figsize=(16,10),stacked=True,colormap='Greens',title='Disbribution of the City-wide Ten Most Common Crimes in Each District')
         plt.savefig('Disbribution_of_the_City-wide_Ten_Most_Common_Crimes_in_Each_District.png')
+        plt.show('Disbribution_of_the_City-wide_Ten_Most_Common_Crimes_in_Each_District.png')
 
         # Now let's look at the crime trend by year for each district. We have three features: 'Year', 'Category' and 'PdDistrict'. For each 'PdDistrict' and 'Year', we would like to see the crime composition instead of simply counts, since data are incomplete for 2015
         freq_by_d_c=pd.pivot_table(train_data[['PdDistrict','Category','Year','Dates']],values='Dates',columns=('Year'),index=('PdDistrict','Category'),aggfunc='count')
@@ -69,6 +72,7 @@ class Visual():
                                 aspect=0.9, palette='rainbow')
         by_hour_for_months=by_hour_for_months.map(plt.plot,'Year','Fraction').add_legend()
         plt.savefig('Crime_Trend_in_Each_District.png')
+        plt.show('Crime_Trend_in_Each_District.png')
 
         # We want to create a scatterplot of crime occurences for the whole city
         # Borrowing the map and information from Ben's script
@@ -85,5 +89,6 @@ class Visual():
         train_data[train_data['Y']<40].plot(x='X',y='Y',ax=ax,kind='scatter',marker='o',s=2,color='green',alpha=0.01)
         ax.set_axis_off()
         plt.savefig('TotalCrimeonMap.png')
+        plt.show('TotalCrimeonMap.png')
 
 

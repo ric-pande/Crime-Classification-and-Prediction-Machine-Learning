@@ -1,5 +1,3 @@
-__author__ = 'carlos.ginestra'
-
 import csv
 import datetime
 import numpy
@@ -34,9 +32,12 @@ class DataDAO():
     def time_features_test(row):
 
         date_str = row[1]
+        #weekday
         dayofweek = DataDAO.weekday_to_number(row[2])
         date = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
         day_time_seconds = date.hour*3600+date.minute*60+date.second
+
+        #get day of yr
         day_year = date.timetuple().tm_yday
 
         return day_year, day_time_seconds, dayofweek
@@ -71,6 +72,8 @@ class DataDAO():
         else:
             raise Exception
 
+#get lat long
+        
     @staticmethod
     def get_coordinates_tr(row):
         return float(row[7]), float(row[8])
@@ -93,7 +96,7 @@ class DataDAO():
         data = DataDAO.get_data_from_csv(filename)
         count = 0
         while count < limit:
-            print data.next()
+            print "show_data_sample=",data.next()
             count += 1
 
     @staticmethod
@@ -117,6 +120,7 @@ class DataDAO():
         targets = []
         data = DataDAO.get_data_from_csv('train.csv')
         for row in data:
+            #append category
             targets.append(row[1])
         return targets
 
@@ -164,8 +168,8 @@ class DataDAO():
                 yield row
 
 if __name__ == "__main__":
-    # DataDAO.get_data_from_csv('test.csv')
+    DataDAO.get_data_from_csv('test.csv')
     DataDAO.show_data_sample(filename='test.csv')
     DataDAO.show_data_sample(filename='train.csv')
 
-    # DataDAO.get_train_vector()
+    DataDAO.get_train_vector()

@@ -1,5 +1,3 @@
-__author__ = 'carlos.ginestra'
-
 from scipy.sparse import csr_matrix
 from data_preparation import DataDAO
 
